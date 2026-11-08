@@ -1,0 +1,290 @@
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+/* ==========================================================================
+   Paleta y tokens
+   ========================================================================== */
+:root {
+  /* Texto y neutros (gris pizarra con matiz verdoso) */
+  --texto: #1e2a2e; /* títulos y texto principal */
+  --texto-label: #2c3b40;
+  --texto-sec: #4f5f63; /* texto secundario (AA sobre fondo y blanco) */
+  --icono: #62777c;
+  --borde-input: #7d9195; /* borde de inputs (3:1 sobre blanco) */
+  --borde: #dde5e3; /* bordes suaves */
+  --fondo-sutil: #eef3f2; /* fondos sutiles */
+
+  /* Fondos */
+  --fondo: #f6f8f7;
+  --superficie: #ffffff;
+
+  /* Principal: petróleo */
+  --primario-hover: #185a62; /* hover y texto sobre petróleo claro */
+  --primario: #1f6f78; /* botones, foco, acentos */
+  --primario-medio: #8cc3c8;
+  --primario-claro: #e3f1f2;
+  --primario-foco: rgba(31, 111, 120, 0.28);
+
+  /* Acento cálido: durazno */
+  --acento-fondo: #fdebdc;
+  --acento-texto: #8a4a12;
+  --acento-medio: #f4a261;
+
+  /* Estados de publicación */
+  --activa-fondo: #dcefdf;
+  --activa-texto: #2e6534;
+  --pausada-fondo: #fbe6b5;
+  --pausada-texto: #744b00;
+  --finalizada-fondo: #e4e9ea;
+  --finalizada-texto: #475356;
+
+  /* Error */
+  --error: #b3261e;
+  --error-texto: #a12b2b;
+  --error-fondo: #fbeceb;
+
+  /* Forma y profundidad */
+  --radio-chico: 0.5rem;
+  --radio: 0.75rem;
+  --radio-grande: 1.25rem;
+  --sombra-suave: 0 1px 2px rgba(30, 42, 46, 0.05), 0 4px 16px rgba(30, 42, 46, 0.06);
+  --sombra-elevada: 0 2px 4px rgba(30, 42, 46, 0.06), 0 14px 32px rgba(30, 42, 46, 0.12);
+  --transicion: 180ms ease;
+
+  /* Tipografía */
+  --fuente-titulos: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --fuente-texto: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+
+  --alto-control: 2.875rem;
+
+  /* Bootstrap */
+  --bs-body-font-family: var(--fuente-texto);
+  --bs-body-color: var(--texto);
+  --bs-body-bg: var(--fondo);
+  --bs-heading-color: var(--texto);
+  --bs-secondary-color: var(--texto-sec);
+  --bs-border-color: var(--borde);
+  --bs-border-radius: var(--radio);
+  --bs-border-radius-sm: var(--radio-chico);
+  --bs-border-radius-lg: var(--radio-grande);
+  --bs-link-color-rgb: 24, 90, 98;
+  --bs-link-hover-color-rgb: 30, 42, 46;
+  --bs-form-invalid-color: var(--error);
+  --bs-form-invalid-border-color: var(--error);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+body {
+  -webkit-font-smoothing: antialiased;
+  overflow-wrap: anywhere;
+}
+
+h1,
+h2,
+.titulo {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--primario);
+  outline-offset: 2px;
+}
+
+/* Bootstrap toma el fondo de la tarjeta de --bs-body-bg; las superficies van en blanco. */
+.card {
+  --bs-card-bg: var(--superficie);
+}
+
+/* ==========================================================================
+   Botones
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  transition:
+    color var(--transicion),
+    background-color var(--transicion),
+    border-color var(--transicion),
+    box-shadow var(--transicion),
+    transform var(--transicion);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* El foco del botón lo marca el outline global, sin el halo de Bootstrap. */
+.btn:focus-visible {
+  outline: 3px solid var(--primario);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--primario);
+  --bs-btn-border-color: var(--primario);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--primario-hover);
+  --bs-btn-hover-border-color: var(--primario-hover);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--primario-hover);
+  --bs-btn-active-border-color: var(--primario-hover);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--primario);
+  --bs-btn-disabled-border-color: var(--primario);
+  --bs-btn-padding-y: 0.65rem;
+  --bs-btn-padding-x: 1.35rem;
+  box-shadow: 0 6px 14px -6px rgba(24, 90, 98, 0.55);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 10px 20px -8px rgba(24, 90, 98, 0.7);
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: var(--texto-label);
+  --bs-btn-border-color: var(--borde-input);
+  --bs-btn-hover-color: var(--texto);
+  --bs-btn-hover-bg: var(--fondo-sutil);
+  --bs-btn-hover-border-color: var(--icono);
+  --bs-btn-active-color: var(--texto);
+  --bs-btn-active-bg: var(--borde);
+  --bs-btn-active-border-color: var(--icono);
+  --bs-btn-padding-y: 0.65rem;
+  --bs-btn-padding-x: 1.35rem;
+}
+
+/* ==========================================================================
+   Formularios
+   ========================================================================== */
+.form-label {
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--texto-label);
+}
+
+.form-control,
+.form-select {
+  min-height: var(--alto-control);
+  border-color: var(--borde-input);
+  background-color: var(--superficie);
+  color: var(--texto);
+  transition:
+    border-color var(--transicion),
+    box-shadow var(--transicion);
+}
+
+.form-control:hover:not(:focus):not(.is-invalid),
+.form-select:hover:not(:focus):not(.is-invalid) {
+  border-color: var(--primario);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primario);
+  box-shadow: 0 0 0 0.25rem var(--primario-foco);
+  outline: 0;
+}
+
+.form-control::file-selector-button {
+  min-height: 100%;
+  background-color: var(--primario-claro);
+  color: var(--primario-hover);
+  font-weight: 700;
+}
+
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+  background-color: #cfe6e8;
+}
+
+.invalid-feedback {
+  font-weight: 600;
+}
+
+/* Input con ícono a la izquierda. Se usa un wrapper en lugar de .input-group
+   para que .invalid-feedback siga siendo hermano directo del input. */
+.campo-icono {
+  position: relative;
+}
+
+.campo-icono > .bi {
+  position: absolute;
+  top: calc(var(--alto-control) / 2);
+  left: 0.95rem;
+  transform: translateY(-50%);
+  color: var(--icono);
+  pointer-events: none;
+  transition: color var(--transicion);
+}
+
+.campo-icono > .form-control {
+  padding-left: 2.65rem;
+}
+
+.campo-icono:focus-within > .bi {
+  color: var(--primario);
+}
+
+/* ==========================================================================
+   Alertas
+   ========================================================================== */
+.alert-danger {
+  --bs-alert-color: var(--error-texto);
+  --bs-alert-bg: var(--error-fondo);
+  --bs-alert-border-color: #f1c9c6;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Marca (corazón en círculo): login, barra superior y alta
+   ========================================================================== */
+.marca {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--primario);
+  color: #fff;
+}
+
+/* ==========================================================================
+   Chips (datos de la tarjeta, especie)
+   ========================================================================== */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: var(--fondo-sutil);
+  color: var(--texto-label);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Accesibilidad: movimiento reducido
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

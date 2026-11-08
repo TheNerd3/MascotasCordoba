@@ -1,0 +1,49 @@
+.login-fondo {
+  padding-block: 1.5rem;
+  background:
+    radial-gradient(38rem 38rem at 8% 6%, rgba(140, 195, 200, 0.32), transparent 70%),
+    radial-gradient(34rem 34rem at 94% 96%, rgba(244, 162, 97, 0.2), transparent 70%),
+    var(--fondo);
+}
+
+.login-tarjeta {
+  max-width: 26.5rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  box-shadow: var(--sombra-elevada);
+}
+
+.login-tarjeta .card-body {
+  padding: 2.5rem 2.25rem;
+}
+
+.login-encabezado {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.login-marca {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  background: var(--primario);
+  color: #fff;
+  font-size: 1.6rem;
+  box-shadow: 0 0 0 0.5rem var(--primario-claro);
+}
+
+.login-titulo {
+  margin-bottom: 0.25rem;
+  font-size: 1.85rem;
+}
+
+.login-subtitulo {
+  margin-bottom: 0;
+  color: var(--texto-sec);
+}
+
+@media (max-width: 575.98px) {
+  .login-tarjeta .card-body {
+    padding: 2rem 1.35rem;
+  }
+}
