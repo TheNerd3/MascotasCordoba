@@ -1,0 +1,111 @@
+<nav class="navbar barra">
+  <div class="container flex-nowrap gap-3">
+    <span class="barra-marca">
+      <span class="marca"><i class="bi bi-heart-fill" aria-hidden="true"></i></span>
+      <span class="titulo d-none d-sm-inline">Mascotas Córdoba</span>
+    </span>
+    <div class="barra-usuario">
+      <span class="barra-refugio text-truncate">
+        <i class="bi bi-building" aria-hidden="true"></i>
+        {{ usuario?.razonSocial }}
+      </span>
+      <button class="btn btn-sm barra-salir" (click)="salir()">
+        <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+        Salir
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="container contenido">
+  <header class="encabezado">
+    <h1 class="encabezado-titulo">Publicaciones de adopción</h1>
+    <a routerLink="/publicaciones/nueva" class="btn btn-primary">
+      <i class="bi bi-plus-lg" aria-hidden="true"></i>
+      Nueva publicación
+    </a>
+  </header>
+
+  @if (error()) {
+    <div class="alert alert-danger" role="alert">
+      <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+      <span>{{ error() }}</span>
+    </div>
+  }
+
+  @if (publicaciones().length === 0) {
+    <div class="vacio">
+      <i class="bi bi-inbox" aria-hidden="true"></i>
+      <p class="mb-0">Todavía no hay publicaciones.</p>
+    </div>
+  }
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @for (p of publicaciones(); track p.nroPublicacion) {
+      <div class="col">
+        <article class="ficha card h-100">
+          <div class="ficha-foto">
+            <img [src]="'data:image/jpeg;base64,' + p.foto" [alt]="'Foto de ' + p.nombre">
+            <span class="chip-estado badge"
+                  [class.text-bg-success]="p.estado === 'ACTIVA'"
+                  [class.text-bg-warning]="p.estado === 'PAUSADA'"
+                  [class.text-bg-secondary]="p.estado === 'FINALIZADA'">
+              {{ p.estado }}
+            </span>
+          </div>
+
+          <div class="card-body ficha-cuerpo">
+            <div class="ficha-titulo">
+              <h2 class="ficha-nombre">{{ p.nombre }}</h2>
+              <span class="chip chip-especie">{{ p.especie }}</span>
+            </div>
+
+            <ul class="ficha-datos">
+              <li class="chip">
+                <i class="bi bi-tag" aria-hidden="true"></i>
+                {{ p.raza }}
+              </li>
+              <li class="chip">
+                <i class="bi"
+                   [class.bi-gender-male]="p.sexo === 'M'"
+                   [class.bi-gender-female]="p.sexo !== 'M'"
+                   aria-hidden="true"></i>
+                {{ p.sexo === 'M' ? 'Macho' : 'Hembra' }}
+              </li>
+              <li class="chip">
+                <i class="bi bi-calendar3" aria-hidden="true"></i>
+                {{ p.edadAproximada }} años
+              </li>
+            </ul>
+
+            <p class="ficha-descripcion">{{ p.caracteristicas }}</p>
+            <p class="ficha-condiciones"><strong>Condiciones:</strong> {{ p.condicionAdopcion }}</p>
+          </div>
+
+          <div class="ficha-acciones">
+            @if (p.estado === 'ACTIVA') {
+              <button class="btn btn-sm accion accion-pausar" (click)="cambiarEstado(p, 'PAUSADA')">
+                <i class="bi bi-pause-fill" aria-hidden="true"></i>
+                Pausar
+              </button>
+            }
+            @if (p.estado === 'PAUSADA') {
+              <button class="btn btn-sm accion accion-activar" (click)="cambiarEstado(p, 'ACTIVA')">
+                <i class="bi bi-play-fill" aria-hidden="true"></i>
+                Activar
+              </button>
+            }
+            @if (p.estado !== 'FINALIZADA') {
+              <button class="btn btn-sm accion accion-finalizar" (click)="cambiarEstado(p, 'FINALIZADA')">
+                <i class="bi bi-x-circle" aria-hidden="true"></i>
+                Finalizar
+              </button>
+            } @else {
+              <span class="sin-acciones">Sin acciones disponibles</span>
+            }
+          </div>
+        </article>
+      </div>
+    }
+  </div>
+</main>

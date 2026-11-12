@@ -1,0 +1,121 @@
+<main class="container alta">
+  <div class="alta-tarjeta card">
+    <header class="alta-encabezado">
+      <span class="marca"><i class="bi bi-heart-fill" aria-hidden="true"></i></span>
+      <h1 class="alta-titulo">Nueva publicación de adopción</h1>
+    </header>
+
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+      <div class="alta-cuerpo">
+
+        <section class="seccion" aria-labelledby="seccion-datos">
+          <h2 id="seccion-datos" class="seccion-titulo">
+            <i class="bi bi-tag" aria-hidden="true"></i>
+            Datos de la mascota
+          </h2>
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input id="nombre" type="text" class="form-control" formControlName="nombre"
+                     [class.is-invalid]="form.controls.nombre.invalid && form.controls.nombre.touched">
+              <div class="invalid-feedback">Ingresá el nombre (hasta 50 caracteres).</div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="especie" class="form-label">Especie</label>
+              <select id="especie" class="form-select" formControlName="nroEspecie"
+                      [class.is-invalid]="form.controls.nroEspecie.invalid && form.controls.nroEspecie.touched">
+                <option [ngValue]="0" disabled>Elegí la especie</option>
+                @for (e of especies(); track e.nroValorDominio) {
+                  <option [ngValue]="e.nroValorDominio">{{ e.nombre }}</option>
+                }
+              </select>
+              <div class="invalid-feedback">Elegí la especie.</div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="raza" class="form-label">Raza</label>
+              <select id="raza" class="form-select" formControlName="nroRaza"
+                      [class.is-invalid]="form.controls.nroRaza.invalid && form.controls.nroRaza.touched">
+                <option [ngValue]="0" disabled>Elegí la raza</option>
+                @for (r of razas(); track r.nroValorDominio) {
+                  <option [ngValue]="r.nroValorDominio">{{ r.nombre }}</option>
+                }
+              </select>
+              <div class="invalid-feedback">Elegí la raza.</div>
+            </div>
+
+            <div class="col-12 col-sm-6">
+              <label for="sexo" class="form-label">Sexo</label>
+              <select id="sexo" class="form-select" formControlName="sexo"
+                      [class.is-invalid]="form.controls.sexo.invalid && form.controls.sexo.touched">
+                <option value="" disabled>Elegí</option>
+                <option value="M">Macho</option>
+                <option value="H">Hembra</option>
+              </select>
+              <div class="invalid-feedback">Elegí el sexo.</div>
+            </div>
+
+            <div class="col-12 col-sm-6">
+              <label for="anio" class="form-label">Año de nacimiento</label>
+              <input id="anio" type="number" class="form-control" formControlName="anioNacimiento"
+                     [class.is-invalid]="form.controls.anioNacimiento.invalid && form.controls.anioNacimiento.touched">
+              <div class="invalid-feedback">Ingresá un año válido.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="seccion" aria-labelledby="seccion-descripcion">
+          <h2 id="seccion-descripcion" class="seccion-titulo">
+            <i class="bi bi-card-text" aria-hidden="true"></i>
+            Descripción
+          </h2>
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="caracteristicas" class="form-label">Descripción general</label>
+              <textarea id="caracteristicas" rows="3" class="form-control" formControlName="caracteristicas"
+                        [class.is-invalid]="form.controls.caracteristicas.invalid && form.controls.caracteristicas.touched"></textarea>
+              <div class="invalid-feedback">Ingresá una descripción (hasta 500 caracteres).</div>
+            </div>
+
+            <div class="col-12">
+              <label for="condicion" class="form-label">Condiciones de adopción</label>
+              <textarea id="condicion" rows="3" class="form-control" formControlName="condicionAdopcion"
+                        [class.is-invalid]="form.controls.condicionAdopcion.invalid && form.controls.condicionAdopcion.touched"></textarea>
+              <div class="invalid-feedback">Ingresá las condiciones (hasta 500 caracteres).</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="seccion" aria-labelledby="seccion-foto">
+          <h2 id="seccion-foto" class="seccion-titulo">
+            <i class="bi bi-camera" aria-hidden="true"></i>
+            Imagen
+          </h2>
+          <label for="foto" class="form-label">Fotografía</label>
+          <input id="foto" type="file" accept="image/*" class="form-control" (change)="onFoto($event)">
+          <div class="vista-previa">
+            @if (fotoVista()) {
+              <img [src]="fotoVista()" alt="Vista previa">
+            }
+          </div>
+        </section>
+
+        @if (error()) {
+          <div class="alert alert-danger mb-0" role="alert">
+            <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+            <span>{{ error() }}</span>
+          </div>
+        }
+      </div>
+
+      <footer class="alta-pie">
+        <button type="button" class="btn btn-outline-secondary" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="guardando()">
+          <i class="bi bi-check-lg" aria-hidden="true"></i>
+          Publicar
+        </button>
+      </footer>
+    </form>
+  </div>
+</main>

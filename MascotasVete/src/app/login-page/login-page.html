@@ -1,0 +1,46 @@
+<main class="login-fondo container-fluid min-vh-100 d-flex align-items-center justify-content-center">
+  <div class="login-tarjeta card w-100">
+    <div class="card-body">
+      <div class="login-encabezado">
+        <span class="marca login-marca"><i class="bi bi-heart-fill" aria-hidden="true"></i></span>
+        <h1 class="login-titulo">Mascotas Córdoba</h1>
+        <p class="login-subtitulo">Ingreso para refugios</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="ingresar()">
+        <div class="mb-3">
+          <label for="cuil" class="form-label">CUIL</label>
+          <div class="campo-icono">
+            <i class="bi bi-person" aria-hidden="true"></i>
+            <input id="cuil" type="text" class="form-control" formControlName="cuil"
+                   maxlength="11" inputmode="numeric"
+                   [class.is-invalid]="form.controls.cuil.invalid && form.controls.cuil.touched">
+            <div class="invalid-feedback">Ingresá un CUIL de 11 dígitos, sin guiones.</div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="clave" class="form-label">Contraseña</label>
+          <div class="campo-icono">
+            <i class="bi bi-lock" aria-hidden="true"></i>
+            <input id="clave" type="password" class="form-control" formControlName="clave"
+                   [class.is-invalid]="form.controls.clave.invalid && form.controls.clave.touched">
+            <div class="invalid-feedback">Ingresá tu contraseña.</div>
+          </div>
+        </div>
+
+        @if (error) {
+          <div class="alert alert-danger" role="alert">
+            <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+            <span>{{ error }}</span>
+          </div>
+        }
+
+        <button type="submit" class="btn btn-primary w-100" [disabled]="cargando">
+          <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>
+          Ingresar
+        </button>
+      </form>
+    </div>
+  </div>
+</main>

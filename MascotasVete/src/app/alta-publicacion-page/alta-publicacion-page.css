@@ -1,0 +1,110 @@
+.alta {
+  max-width: 48rem;
+  padding-block: 2rem 3rem;
+}
+
+.alta-tarjeta {
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  box-shadow: var(--sombra-elevada);
+}
+
+.alta-encabezado {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--borde);
+  background: var(--primario-claro);
+}
+
+.alta-titulo {
+  margin: 0;
+  font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.55rem);
+}
+
+.alta-cuerpo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding: 1.75rem;
+}
+
+.seccion:not(:first-child) {
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--borde);
+}
+
+.seccion-titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+  font-size: 1.15rem;
+}
+
+.seccion-titulo .bi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radio-chico);
+  background: var(--primario-claro);
+  color: var(--primario-hover);
+  font-size: 1rem;
+}
+
+/* Vista previa: si el @if no renderiza la imagen, el contenedor queda vacío
+   y se muestra el marco de espera (Angular solo deja un comentario adentro). */
+.vista-previa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 11rem;
+  margin-top: 0.85rem;
+  overflow: hidden;
+  border: 2px dashed var(--borde);
+  border-radius: var(--radio);
+  background: var(--fondo);
+}
+
+.vista-previa:empty::before {
+  content: 'La vista previa aparece acá';
+  padding: 1rem;
+  color: var(--texto-sec);
+  font-size: 0.9rem;
+}
+
+.vista-previa img {
+  display: block;
+  width: 100%;
+  max-height: 20rem;
+  object-fit: contain;
+}
+
+.alta-pie {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1.1rem 1.75rem;
+  border-top: 1px solid var(--borde);
+  background: var(--fondo-sutil);
+}
+
+@media (max-width: 575.98px) {
+  .alta {
+    padding-block: 1rem 2rem;
+  }
+
+  .alta-encabezado,
+  .alta-cuerpo,
+  .alta-pie {
+    padding-inline: 1.15rem;
+  }
+
+  .alta-pie .btn {
+    flex: 1 1 0;
+  }
+}
