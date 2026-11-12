@@ -1,4 +1,4 @@
-USE CordobaMascotas;
+﻿USE CordobaMascotas;
 GO
 
 -- Fotos para las publicaciones 1 a 5, que tenian texto de relleno (foto-luna, foto-toby, ...)

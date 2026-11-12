@@ -1,7 +1,7 @@
-USE CordobaMascotas;
+ï»¿USE CordobaMascotas;
 GO
 
--- Clave sustituta autonumérica; desc y tipo obligatorios, observación opcional
+-- Clave sustituta autonumÃ©rica; desc y tipo obligatorios, observaciÃ³n opcional
 CREATE TABLE atributos_sistema (
     cod_atributo     INT IDENTITY(1,1) NOT NULL,
     desc_atributo    VARCHAR(100)      NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE atributos_sistema (
 );
 GO
 
--- Teléfono opcional (el correo ya es un contacto obligatorio)
+-- TelÃ©fono opcional (el correo ya es un contacto obligatorio)
 CREATE TABLE veterinarias (
     id_veterinaria         INT IDENTITY(1,1) NOT NULL,
     razon_social           VARCHAR(100)      NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE veterinarias (
 GO
 
 -- cuil CHAR(11) UNIQUE: es el dato del login (RF15)
--- clave: se guarda el hash de la contraseña, no el texto plano
+-- clave: se guarda el hash de la contraseÃ±a, no el texto plano
 -- habilitado BIT por defecto 1: permite bloquear el acceso sin borrar
 CREATE TABLE ciudadanos (
     id_ciudadano  INT IDENTITY(1,1) NOT NULL,
@@ -41,8 +41,8 @@ CREATE TABLE ciudadanos (
 );
 GO
 
--- id_responsable NOT NULL: relación con "|" del lado de ciudadanos
--- Es lo que permite saber a qué refugio pertenece el usuario autenticado
+-- id_responsable NOT NULL: relaciÃ³n con "|" del lado de ciudadanos
+-- Es lo que permite saber a quÃ© refugio pertenece el usuario autenticado
 CREATE TABLE refugios (
     id_refugio             INT IDENTITY(1,1) NOT NULL,
     razon_social           VARCHAR(100)      NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE rasgos_mascotas (
 );
 GO
 
--- Relación identificante: PK (cod_rasgo, nro_valor_dominio)
+-- RelaciÃ³n identificante: PK (cod_rasgo, nro_valor_dominio)
 -- nro_valor_dominio sin IDENTITY: es un orden dentro de cada rasgo
 CREATE TABLE dominio_rasgos_mascotas (
     cod_rasgo          INT          NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE configuracion_veterinatarias (
 GO
 
 -- id_profesional referencia a ciudadanos (el profesional es un ciudadano)
--- baja: baja lógica, por defecto 0 (en actividad)
+-- baja: baja lÃ³gica, por defecto 0 (en actividad)
 CREATE TABLE profesionales_veterinarias (
     id_veterinaria  INT NOT NULL,
     id_profesional  INT NOT NULL,
@@ -111,13 +111,13 @@ CREATE TABLE profesionales_veterinarias (
 GO
 
 -- nro_reg_municipal IDENTITY: el sistema municipal asigna el registro
--- sexo con CHECK 'M'/'H'; [año_nacimiento] solo el año (edad aproximada)
+-- sexo con CHECK 'M'/'H'; [aÃ±o_nacimiento] solo el aÃ±o (edad aproximada)
 -- id_responsable e id_refugio NULL: "o|" del lado padre en el diagrama
 CREATE TABLE mascotas (
     nro_reg_municipal  INT IDENTITY(1,1) NOT NULL,
     nombre             VARCHAR(50)       NOT NULL,
     sexo               CHAR(1)           NOT NULL,
-    [año_nacimiento]   SMALLINT          NULL,
+    [aÃ±o_nacimiento]   SMALLINT          NULL,
     microchip          VARCHAR(20)       NULL,
     vive               BIT               NOT NULL CONSTRAINT DF_mascotas_vive DEFAULT 1,
     id_responsable     INT               NULL,
@@ -150,7 +150,7 @@ CREATE TABLE caracteristicas_mascotas (
 );
 GO
 
--- nro_registro sin IDENTITY: es el orden de atención dentro de cada mascota
+-- nro_registro sin IDENTITY: es el orden de atenciÃ³n dentro de cada mascota
 -- fecha_vencimiento opcional: solo aplica a vacunas y similares
 CREATE TABLE informacion_sanitaria (
     nro_reg_municipal  INT           NOT NULL,

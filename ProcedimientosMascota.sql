@@ -1,12 +1,12 @@
-USE CordobaMascotas;
+ï»¿USE CordobaMascotas;
 GO
 
--- Las contraseñas pasan a guardarse como hash SHA-256 (64 caracteres hex)
+-- Las contraseÃ±as pasan a guardarse como hash SHA-256 (64 caracteres hex)
 UPDATE ciudadanos
 SET clave = CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'clave123'), 2);
 GO
 
--- RF15: valida CUIL + contraseña. Devuelve 1 fila si son correctos, 0 filas si no.
+-- RF15: valida CUIL + contraseÃ±a. Devuelve 1 fila si son correctos, 0 filas si no.
 CREATE OR ALTER PROCEDURE sp_login
     @cuil  CHAR(11),
     @clave VARCHAR(100)
@@ -40,7 +40,7 @@ BEGIN
              WHERE c.nro_reg_municipal = m.nro_reg_municipal
                AND r.nom_rasgo = 'Especie') AS especie,
            m.sexo,
-           YEAR(GETDATE()) - m.[año_nacimiento] AS edad_aproximada,
+           YEAR(GETDATE()) - m.[aÃ±o_nacimiento] AS edad_aproximada,
            (SELECT TOP 1 d.nom_valor_dominio
               FROM caracteristicas_mascotas c
               JOIN rasgos_mascotas r ON r.cod_rasgo = c.cod_rasgo
@@ -75,7 +75,7 @@ BEGIN
 END
 GO
 
--- RF13: alta de publicación (crea la mascota, sus características y la publicación)
+-- RF13: alta de publicaciÃ³n (crea la mascota, sus caracterÃ­sticas y la publicaciÃ³n)
 CREATE OR ALTER PROCEDURE sp_alta_publicacion
     @id_refugio         INT,
     @nombre             VARCHAR(50),
@@ -97,7 +97,7 @@ BEGIN
 
     BEGIN TRANSACTION;
 
-    INSERT INTO mascotas (nombre, sexo, [año_nacimiento], vive, id_refugio)
+    INSERT INTO mascotas (nombre, sexo, [aÃ±o_nacimiento], vive, id_refugio)
     VALUES (@nombre, @sexo, @anio_nacimiento, 1, @id_refugio);
     SET @nro_reg = SCOPE_IDENTITY();
 
@@ -114,7 +114,7 @@ BEGIN
 END
 GO
 
--- RF13: activar / pausar / finalizar. Devuelve cuántas filas cambió (0 = operación no permitida)
+-- RF13: activar / pausar / finalizar. Devuelve cuÃ¡ntas filas cambiÃ³ (0 = operaciÃ³n no permitida)
 CREATE OR ALTER PROCEDURE sp_cambiar_estado
     @nro_publicacion INT,
     @id_refugio      INT,

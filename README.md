@@ -64,9 +64,10 @@ Scripts, en el orden en que deben ejecutarse (todos sobre la base `CordobaMascot
 
 | Orden | Contenido |
 |---|---|
-| 1 | Creación de la base y de las 13 tablas del modelo lógico. |
+| 1 | Creación de las 13 tablas del modelo lógico (la base CordobaMascotas debe existir). |
 | 2 | Datos de prueba: 3 ciudadanos, 2 refugios, mascotas, características y publicaciones. |
 | 3 | Procedimientos almacenados (tabla siguiente). Incluye pasar las contraseñas a hash SHA-256. |
+| 4 | `FotosPublicaciones.sql`: Asigna fotos de prueba a las publicaciones. |
 
 Usuario de la aplicación: se creó un login de SQL Server propio (`mascotas_app`) con rol `db_owner` sobre la base, en lugar de usar `sa`.
 

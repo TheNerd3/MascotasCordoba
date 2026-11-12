@@ -1,11 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Publicacion, PublicacionResource } from '../publicacion-resource';
 import { Sesion } from '../sesion';
 
 @Component({
   selector: 'app-publicaciones-page',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './publicaciones-page.html',
   styleUrl: './publicaciones-page.css'
 })
